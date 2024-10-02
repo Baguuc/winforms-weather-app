@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             TemperatureValueLabel = new Label();
             HumidityValueLabel = new Label();
             RainValueLabel = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
+            WeatherTimer = new System.Windows.Forms.Timer(components);
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -85,6 +87,12 @@
             tableLayoutPanel1.Size = new Size(200, 100);
             tableLayoutPanel1.TabIndex = 3;
             // 
+            // WeatherTimer
+            // 
+            WeatherTimer.Enabled = true;
+            WeatherTimer.Interval = 900000;
+            WeatherTimer.Tick += WeatherTimerTick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -104,5 +112,6 @@
         private Label HumidityValueLabel;
         private Label RainValueLabel;
         private TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Timer WeatherTimer;
     }
 }

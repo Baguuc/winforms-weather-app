@@ -10,7 +10,7 @@ namespace Pogoda
             InitializeComponent();
             this.UpdateWeatherData();
         }
-        
+
         private void UpdateWeatherData()
         {
             WeatherInfoRaw raw = WeatherInfoRaw.Fetch();
@@ -19,6 +19,11 @@ namespace Pogoda
             this.TemperatureValueLabel.Text = weather.GetTemperature().ToString();
             this.HumidityValueLabel.Text = weather.GetHumidity().ToString();
             this.RainValueLabel.Text = weather.GetRain().ToString();
+        }
+
+        private void WeatherTimerTick(object sender, EventArgs e)
+        {
+            this.UpdateWeatherData();
         }
     }
 
