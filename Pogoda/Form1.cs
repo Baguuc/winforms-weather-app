@@ -1,10 +1,13 @@
-using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace Pogoda
 {
     public partial class Form1 : Form
     {
+        // in seconds
+        private int lastRefreshed;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,11 +22,60 @@ namespace Pogoda
             this.TemperatureValueLabel.Text = weather.GetTemperature().ToString();
             this.HumidityValueLabel.Text = weather.GetHumidity().ToString();
             this.RainValueLabel.Text = weather.GetRain().ToString();
+
+            this.lastRefreshed = 0;
         }
 
         private void WeatherTimerTick(object sender, EventArgs e)
         {
             this.UpdateWeatherData();
+        }
+
+        private void RefreshTimerTick(object sender, EventArgs e)
+        {
+            this.lastRefreshed += this.RefreshLabelUpdateTimer.Interval / 1000;
+
+            // ustawiamy opoznienie aby pokazywac "Teraz" przez 5 sekund bo to tak jakby bylo teraz
+            // setting a delay because to show "Teraz" for 5 seconds because this is like it was 
+            if (this.lastRefreshed < 4)
+            {
+                this.RefreshLabelUpdateTimer.Interval = 5000;
+            }
+            else
+            {
+                this.RefreshLabelUpdateTimer.Interval = 1000;
+            }
+
+            int minutes = this.lastRefreshed / 60;
+            int seconds = this.lastRefreshed - minutes * 60;
+
+            string refreshLabel = "";
+            
+            if(minutes > 0)
+            {
+                refreshLabel += minutes + "m";
+            }
+
+            if (seconds > 0)
+            {
+                if (minutes > 0)
+                {
+                    refreshLabel += " i ";
+                }
+
+                refreshLabel += seconds + "s";
+            }
+
+            if(minutes > 0 || seconds > 0)
+            {
+                refreshLabel += " temu";
+            }
+            else
+            {
+                refreshLabel = "Teraz";
+            }
+
+            this.LastRefreshLabelValue.Text = refreshLabel;
         }
     }
 

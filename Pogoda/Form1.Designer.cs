@@ -30,14 +30,19 @@
         {
             components = new System.ComponentModel.Container();
             WeatherInfoGrid = new TableLayoutPanel();
-            timer1 = new System.Windows.Forms.Timer(components);
             TemperatureValueLabel = new Label();
             HumidityValueLabel = new Label();
             RainValueLabel = new Label();
             TemperatureLabel = new Label();
             HumidityLabel = new Label();
             RainLabel = new Label();
+            WeatherInfoTimer = new System.Windows.Forms.Timer(components);
+            LastRefreshLabel = new Label();
+            LastRefreshInfoGrid = new TableLayoutPanel();
+            LastRefreshLabelValue = new Label();
+            RefreshLabelUpdateTimer = new System.Windows.Forms.Timer(components);
             WeatherInfoGrid.SuspendLayout();
+            LastRefreshInfoGrid.SuspendLayout();
             SuspendLayout();
             // 
             // WeatherInfoGrid
@@ -59,12 +64,6 @@
             WeatherInfoGrid.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             WeatherInfoGrid.Size = new Size(446, 100);
             WeatherInfoGrid.TabIndex = 3;
-            // 
-            // timer1
-            // 
-            timer1.Enabled = true;
-            timer1.Interval = 900000;
-            timer1.Tick += WeatherTimerTick;
             // 
             // TemperatureValueLabel
             // 
@@ -132,27 +131,83 @@
             RainLabel.Text = "Opady";
             RainLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // WeatherInfoTimer
+            // 
+            WeatherInfoTimer.Enabled = true;
+            WeatherInfoTimer.Interval = 900000;
+            WeatherInfoTimer.Tick += WeatherTimerTick;
+            // 
+            // LastRefreshLabel
+            // 
+            LastRefreshLabel.AutoSize = true;
+            LastRefreshLabel.Dock = DockStyle.Fill;
+            LastRefreshLabel.Location = new Point(3, 0);
+            LastRefreshLabel.Name = "LastRefreshLabel";
+            LastRefreshLabel.Size = new Size(94, 49);
+            LastRefreshLabel.TabIndex = 4;
+            LastRefreshLabel.Text = "Ostatnio odświeżono:";
+            LastRefreshLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // LastRefreshInfoGrid
+            // 
+            LastRefreshInfoGrid.ColumnCount = 2;
+            LastRefreshInfoGrid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            LastRefreshInfoGrid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            LastRefreshInfoGrid.Controls.Add(LastRefreshLabel, 0, 0);
+            LastRefreshInfoGrid.Controls.Add(LastRefreshLabelValue, 1, 0);
+            LastRefreshInfoGrid.Location = new Point(295, 80);
+            LastRefreshInfoGrid.Name = "LastRefreshInfoGrid";
+            LastRefreshInfoGrid.RowCount = 1;
+            LastRefreshInfoGrid.RowStyles.Add(new RowStyle());
+            LastRefreshInfoGrid.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            LastRefreshInfoGrid.Size = new Size(200, 49);
+            LastRefreshInfoGrid.TabIndex = 5;
+            // 
+            // LastRefreshLabelValue
+            // 
+            LastRefreshLabelValue.AutoSize = true;
+            LastRefreshLabelValue.Dock = DockStyle.Fill;
+            LastRefreshLabelValue.Location = new Point(103, 0);
+            LastRefreshLabelValue.Name = "LastRefreshLabelValue";
+            LastRefreshLabelValue.Size = new Size(94, 49);
+            LastRefreshLabelValue.TabIndex = 5;
+            LastRefreshLabelValue.Text = "Teraz";
+            LastRefreshLabelValue.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // RefreshLabelUpdateTimer
+            // 
+            RefreshLabelUpdateTimer.Enabled = true;
+            RefreshLabelUpdateTimer.Interval = 5000;
+            RefreshLabelUpdateTimer.Tick += RefreshTimerTick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(LastRefreshInfoGrid);
             Controls.Add(WeatherInfoGrid);
             Name = "Form1";
             Text = "Form1";
             WeatherInfoGrid.ResumeLayout(false);
             WeatherInfoGrid.PerformLayout();
+            LastRefreshInfoGrid.ResumeLayout(false);
+            LastRefreshInfoGrid.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
         private TableLayoutPanel WeatherInfoGrid;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer WeatherInfoTimer;
         private Label TemperatureValueLabel;
         private Label HumidityValueLabel;
         private Label RainValueLabel;
         private Label TemperatureLabel;
         private Label HumidityLabel;
         private Label RainLabel;
+        private Label LastRefreshLabel;
+        private TableLayoutPanel LastRefreshInfoGrid;
+        private Label LastRefreshLabelValue;
+        private System.Windows.Forms.Timer RefreshLabelUpdateTimer;
     }
 }
