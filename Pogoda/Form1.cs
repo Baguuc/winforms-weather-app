@@ -76,6 +76,11 @@ namespace Pogoda
         {
             return this.value;
         }
+
+        public string ToString()
+        {
+            return this.value + this.unit;
+        }
     }
 
     class WeatherInfoRaw
