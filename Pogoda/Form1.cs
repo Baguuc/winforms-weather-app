@@ -11,6 +11,7 @@ namespace Pogoda
         }
     }
 
+
     class WeatherInfo
     {
         private Scalar<float> temperature { get; }
@@ -24,7 +25,7 @@ namespace Pogoda
             this.rain = rain;
         }
 
-        public WeatherInfo FromRaw(WeatherInfoRaw raw)
+        public static WeatherInfo FromRaw(WeatherInfoRaw raw)
         {
             Scalar<float> temperature = new Scalar<float>(raw.current_units.temperature_2m, raw.current.temperature_2m);
             Scalar<float> humidity = new Scalar<float>(raw.current_units.relative_humidity_2m, raw.current.relative_humidity_2m)
@@ -38,6 +39,21 @@ namespace Pogoda
 
             return data;
         }
+
+        public Scalar<float> GetTemperature()
+        {
+            return this.temperature;
+        }
+
+        public Scalar<float> GetHumidity()
+        {
+            return this.humidity;
+        }
+
+        public Scalar<float> GetRain()
+        {
+            return this.rain;
+        }
     }
 
     class Scalar<T>
@@ -49,6 +65,16 @@ namespace Pogoda
         {
             this.unit = unit;
             this.value = value;
+        }
+        
+        public string GetUnit()
+        {
+            return this.unit;
+        } 
+        
+        public T GetValue()
+        {
+            return this.value;
         }
     }
 
