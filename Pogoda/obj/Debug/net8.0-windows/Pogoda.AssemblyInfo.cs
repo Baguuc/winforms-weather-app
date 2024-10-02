@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Pogoda")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d58eba9d439e04ec97affb268cb2e7089d567e62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc8205426b14186038b82adc907774dbe9347b1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pogoda")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pogoda")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
