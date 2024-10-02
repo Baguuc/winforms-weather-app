@@ -8,6 +8,17 @@ namespace Pogoda
         public Form1()
         {
             InitializeComponent();
+            this.UpdateWeatherData();
+        }
+        
+        private void UpdateWeatherData()
+        {
+            WeatherInfoRaw raw = WeatherInfoRaw.Fetch();
+            WeatherInfo weather = WeatherInfo.FromRaw(raw);
+
+            this.TemperatureValueLabel.Text = weather.GetTemperature().ToString();
+            this.HumidityValueLabel.Text = weather.GetHumidity().ToString();
+            this.RainValueLabel.Text = weather.GetRain().ToString();
         }
     }
 
@@ -28,7 +39,7 @@ namespace Pogoda
         public static WeatherInfo FromRaw(WeatherInfoRaw raw)
         {
             Scalar<float> temperature = new Scalar<float>(raw.current_units.temperature_2m, raw.current.temperature_2m);
-            Scalar<float> humidity = new Scalar<float>(raw.current_units.relative_humidity_2m, raw.current.relative_humidity_2m)
+            Scalar<float> humidity = new Scalar<float>(raw.current_units.relative_humidity_2m, raw.current.relative_humidity_2m);
             Scalar<float> rain = new Scalar<float>(raw.current_units.rain, raw.current.rain);
 
             WeatherInfo data = new WeatherInfo(
@@ -85,8 +96,8 @@ namespace Pogoda
 
     class WeatherInfoRaw
     {
-        public WeatherInfoRawUnits current_units;
-        public WeatherInfoRawData current;
+        public WeatherInfoRawUnits current_units { get; set; }
+        public WeatherInfoRawData current { get; set; }
 
 
         public static WeatherInfoRaw Fetch()
