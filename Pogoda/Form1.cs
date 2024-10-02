@@ -3,15 +3,20 @@ using System.Windows.Forms;
 
 namespace Pogoda
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         // in seconds
         private int lastRefreshed;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             this.UpdateWeatherData();
+        }
+
+        public void MainFormResize(object sender, EventArgs e)
+        {
+            this.RootGrid.Size = this.Size;
         }
 
         private void UpdateWeatherData()
@@ -50,8 +55,8 @@ namespace Pogoda
             int seconds = this.lastRefreshed - minutes * 60;
 
             string refreshLabel = "";
-            
-            if(minutes > 0)
+
+            if (minutes > 0)
             {
                 refreshLabel += minutes + "m";
             }
@@ -66,7 +71,7 @@ namespace Pogoda
                 refreshLabel += seconds + "s";
             }
 
-            if(minutes > 0 || seconds > 0)
+            if (minutes > 0 || seconds > 0)
             {
                 refreshLabel += " temu";
             }
@@ -76,6 +81,16 @@ namespace Pogoda
             }
 
             this.LastRefreshLabelValue.Text = refreshLabel;
+        }
+
+        public void M(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TemperatureValueLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
